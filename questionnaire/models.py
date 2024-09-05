@@ -40,45 +40,13 @@ class Course(models.Model):
 
 
 class QuestionPaper(models.Model):
-    class SEMESTERS(models.TextChoices):
-        FIRST_SEMESTER = "1", "1"
-        SECOND_SEMESTER = "2", "2"
-
-    class YEARS(models.TextChoices):
-        YEAR_1 = "1", "1"
-        YEAR_2 = "2", "2"
-        YEAR_3 = "3", "3"
-        YEAR_4 = "4", "4"
-
-    class INTAKES(models.TextChoices):
-        JAN = (
-            "JAN",
-            "JAN",
-        )
-        MAY = (
-            "MAY",
-            "MAY",
-        )
-        AUG = (
-            "AUG",
-            "AUG",
-        )
+    
     department = models.ForeignKey(Department, on_delete=models.CASCADE, related_name='question_papers', null=True, blank=True)
    
     course = models.ForeignKey(
         Course, on_delete=models.CASCADE, related_name="question_papers"
     )
-    year = models.IntegerField(default=2024)
-    year_of_study = models.CharField(
-        max_length=2, choices=YEARS.choices, default=YEARS.YEAR_1
-    )
-    intake = models.CharField(
-        max_length=10, choices=INTAKES.choices, default=INTAKES.JAN
-    )
-
-    semester = models.CharField(
-        max_length=10, choices=SEMESTERS.choices, default=SEMESTERS.FIRST_SEMESTER
-    )
+   
     document = models.FileField(upload_to="question_papers/")
     content = models.TextField(blank=True, null=True, editable=False)
 

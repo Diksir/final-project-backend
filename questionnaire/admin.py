@@ -21,9 +21,9 @@ class CourseAdmin(admin.ModelAdmin):
 
 @admin.register(QuestionPaper)
 class QuestionPaperAdmin(admin.ModelAdmin):
-    ist_display = ('course', 'year', 'semester', 'document')
-    search_fields = ('course__name', 'year', 'semester')
-    list_filter = ('course', 'year', 'semester')
+    ist_display = ('course', 'document')
+    search_fields = ('course__name',)
+    list_filter = ('course',)
 
     def formfield_for_foreignkey(self, db_field, request, **kwargs):
         if db_field.name == "course":

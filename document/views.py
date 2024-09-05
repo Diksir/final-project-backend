@@ -7,7 +7,7 @@ from django.conf import settings
 import convertapi
 import os
 
-CONVERTAPI_SECRET = 'ZVTWIn3nURW3T88s'
+CONVERTAPI_SECRET = 'secret_nCY8P1gP5C5tuzm5'
 UPLOAD_LOCATION = "media/"
 
 convertapi.api_secret = CONVERTAPI_SECRET

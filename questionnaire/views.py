@@ -21,7 +21,9 @@ from openai import OpenAI
 class FacultyListAPIView(APIView):
     def get(self, request):
         faculties = Faculty.objects.all()
-        serializer = FacultySerializer(faculties, context={'request': request}, many=True)
+        serializer = FacultySerializer(
+            faculties, context={"request": request}, many=True
+        )
         return Response(serializer.data, status=status.HTTP_200_OK)
 
 
@@ -98,16 +100,12 @@ class StartQSession(APIView):
 
     def post(self, request):
         course_id = request.data.get("course_id")
-        year = request.data.get("year")
-        semester = request.data.get("semester")
-        intake = request.data.get('intake')
-        year_of_study = request.data.get('year_of_study')
 
         user = request.user
         course = get_object_or_404(Course, id=course_id)
 
         question_paper = QuestionPaper.objects.filter(
-            course=course, year=year, semester=semester, year_of_study=year_of_study, intake=intake
+            course=course,
         ).first()
 
         if not question_paper:
@@ -162,8 +160,9 @@ class SendMessage(APIView):
             status=status.HTTP_201_CREATED,
         )
 
+
 class YearsListAPIView(APIView):
-    def get (self, request):
+    def get(self, request):
         year_list = {}
         for year in QuestionPaper.objects.all():
             year_list[year.year] = year.year
